@@ -2,6 +2,7 @@ package com.gestionmvp.service;
 
 import com.gestionmvp.persistence.entity.Cargo;
 import com.gestionmvp.persistence.repository.CargoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,16 @@ public class CargoService {
     public Cargo encontrarCargoPorId(Long id){
         return this.cargoRepository.findById(id)
                 .orElseThrow(()-> new NoSuchElementException("El cargo con id: " + id + " no existe."));
+    }
+
+    public Cargo modificarCargo(Long id, Cargo cargoRecibido){
+        Cargo cargo = this.encontrarCargoPorId(id);
+        if(cargo == null)
+            throw new NoSuchElementException("No se encontro el id: " + id);
+
+        cargo.setNombreCargo(cargoRecibido.getNombreCargo());
+        cargo.setDescripcion(cargoRecibido.getDescripcion());
+        return cargo;
     }
 
     public Cargo guardarCargo(Cargo cargo){

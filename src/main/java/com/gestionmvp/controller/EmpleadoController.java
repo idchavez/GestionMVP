@@ -1,5 +1,6 @@
-package com.gestionmvp.controller.dto;
+package com.gestionmvp.controller;
 
+import com.gestionmvp.dto.EmpleadoDTO;
 import com.gestionmvp.persistence.entity.Empleado;
 import com.gestionmvp.service.EmpleadoService;
 import com.inventarios.exception.RecursoNoEncontradoExcepcion;
@@ -42,7 +43,7 @@ public class EmpleadoController {
     }
 
     @GetMapping("/empleados/{id}")
-    public ResponseEntity<EmpleadoDTO> buscarEmpleadoPorId(@PathVariable long id){
+    public ResponseEntity<EmpleadoDTO> buscarEmpleadoPorId(@PathVariable Long id){
         Empleado empleado = this.empleadoService.encontrarEmpleadoPorId(id);
         if(empleado != null){
             return  ResponseEntity.ok(new EmpleadoDTO(empleado));
@@ -78,14 +79,14 @@ public class EmpleadoController {
 //    }
 
     @PutMapping("/empleados/{id}")
-    public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable long id, @RequestBody Empleado empleadoRecibido){
+    public ResponseEntity<EmpleadoDTO> actualizarEmpleado(@PathVariable Long id, @RequestBody Empleado empleadoRecibido){
         Empleado empleado = this.empleadoService.modificarEmpleado(id,empleadoRecibido);
         this.empleadoService.guardarEmpleado(empleado);
         return ResponseEntity.ok(new EmpleadoDTO(empleado));
     }
 
     @DeleteMapping("/empleados/{id}")
-    public ResponseEntity<Map<String,Boolean>> eliminarEmpleado(@PathVariable long id){
+    public ResponseEntity<Map<String,Boolean>> eliminarEmpleado(@PathVariable Long id){
         Empleado empleado = empleadoService.encontrarEmpleadoPorId(id);
         if (empleado == null)
             throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);

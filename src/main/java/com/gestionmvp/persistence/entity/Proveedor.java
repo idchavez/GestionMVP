@@ -23,7 +23,7 @@ public class Proveedor {
 
     private String telefono;
 
-    private Integer nit;
+    private String nit;
 
     @Column(unique = true, nullable = false)
     private String correo;

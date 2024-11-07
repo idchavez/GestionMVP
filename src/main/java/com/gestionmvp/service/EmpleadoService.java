@@ -1,10 +1,9 @@
 package com.gestionmvp.service;
 
-import com.gestionmvp.controller.dto.EmpleadoDTO;
+import com.gestionmvp.dto.EmpleadoDTO;
 import com.gestionmvp.persistence.entity.Empleado;
 import com.gestionmvp.persistence.repository.EmpleadoRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,12 +35,12 @@ public class EmpleadoService {
         return empleado;
     }
 
-    public Empleado modificarEmpleado(long id, Empleado empleadoRecibido){
+    public Empleado modificarEmpleado(Long id, Empleado empleadoRecibido){
 
         Empleado empleado = this.encontrarEmpleadoPorId(id);
 
         if(empleado == null)
-            throw new com.inventarios.exception.RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+            throw new NoSuchElementException("No se encontro el id: " + id);
 
         empleado.setNombres(empleadoRecibido.getNombres());
         empleado.setApellidos(empleadoRecibido.getApellidos());

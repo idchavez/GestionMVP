@@ -20,9 +20,24 @@ public class ProveedorService {
         return this.proveedorRepository.findAll();
     }
 
-    public Proveedor encontraProveedorPorId(Long id){
+    public Proveedor encontrarProveedorPorId(Long id){
         return this.proveedorRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("El proveedor con id: " + id + " no existe."));
+    }
+
+    public Proveedor modificarProveedor(Long id, Proveedor proveedorRecibido){
+        Proveedor proveedor = this.encontrarProveedorPorId(id);
+
+        if(proveedor == null)
+            throw new NoSuchElementException("No se encontro el id: " + id );
+
+        proveedor.setNombreProveedor(proveedorRecibido.getNombreProveedor());
+        proveedor.setTelefono(proveedorRecibido.getTelefono());
+        proveedor.setNit(proveedorRecibido.getNit());
+        proveedor.setCorreo(proveedorRecibido.getCorreo());
+
+        return proveedor;
+
     }
 
     public Proveedor guardarProveedor(Proveedor proveedor){

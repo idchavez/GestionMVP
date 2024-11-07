@@ -1,5 +1,10 @@
 package com.gestionmvp.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.gestionmvp.util.ProveedorDeserializer;
+import com.gestionmvp.util.ProveedorSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +21,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "productos")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Producto {
 
     @Id
@@ -33,6 +39,8 @@ public class Producto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proveedor_id")
+    @JsonDeserialize(using = ProveedorDeserializer.class)
+    //@JsonSerialize(using = ProveedorSerializer.class)
     private Proveedor proveedor;
 
     @Column(name = "estado_producto", nullable = false)

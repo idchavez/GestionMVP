@@ -1,4 +1,4 @@
-package com.gestionmvp.controller.dto;
+package com.gestionmvp.dto;
 
 import com.gestionmvp.persistence.entity.Empleado;
 import com.gestionmvp.persistence.entity.EstadoLaboralEnum;

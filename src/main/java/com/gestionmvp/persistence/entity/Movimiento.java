@@ -1,5 +1,11 @@
 package com.gestionmvp.persistence.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.gestionmvp.util.EmpleadoDeserializer;
+import com.gestionmvp.util.EmpleadoSerializer;
+import com.gestionmvp.util.ProductoDeserializer;
+import com.gestionmvp.util.ProveedorDeserializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +28,7 @@ public class Movimiento {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "producto_id")
+    @JsonDeserialize(using = ProductoDeserializer.class)
     private Producto productoMovimiento;
 
     @Column(name = "tipo_movimiento")
@@ -36,6 +43,8 @@ public class Movimiento {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empleado_id")
+    @JsonDeserialize(using = EmpleadoDeserializer.class)
+    @JsonSerialize(using = EmpleadoSerializer.class)
     private Empleado responsable;
 
 }

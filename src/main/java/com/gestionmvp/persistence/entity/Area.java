@@ -2,6 +2,10 @@ package com.gestionmvp.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.gestionmvp.util.EmpleadoDeserializer;
+import com.gestionmvp.util.EmpleadoSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,12 +31,11 @@ public class Area {
 
     private String descripcion;
 
-//    @OneToMany(mappedBy = "area", fetch = FetchType.LAZY)
-//    private List<Empleado> empleados;
-
     @OneToOne
     //@JsonBackReference
-    @JsonIgnore
+    //@JsonIgnore
+    @JsonDeserialize(using =EmpleadoDeserializer.class)
+    @JsonSerialize(using = EmpleadoSerializer.class)
     @JoinColumn(name = "encargado_id")
     private Empleado encargado;
 

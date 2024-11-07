@@ -1,5 +1,10 @@
 package com.gestionmvp.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.gestionmvp.util.EmpleadoDeserializer;
+import com.gestionmvp.util.EmpleadoSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +25,13 @@ public class Actividad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nombre;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "asignacion_id")
+    @JsonDeserialize(using = EmpleadoDeserializer.class)
+    @JsonSerialize(using = EmpleadoSerializer.class)
+    //@JsonIgnoreProperties({"nombres","apellidos","cargo","area","fechaIngreso","estadoLaboralEnum","correo","telefono"})
     private Empleado empleadoAsignado;
 
     private String descripcion;

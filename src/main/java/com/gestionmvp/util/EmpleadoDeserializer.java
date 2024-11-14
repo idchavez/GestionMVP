@@ -21,8 +21,8 @@ public class EmpleadoDeserializer extends JsonDeserializer<Empleado> {
         Long id = jsonParser.getLongValue();
         Empleado empleado = new Empleado();
         empleado.setId(id);
-        return empleado;
-//        return this.empleadoRepository.findById(id)
-//                .orElseThrow(()-> new IOException("Empleado con id " + id +" no encontrado"));
+        //return empleado;
+        return this.empleadoRepository.findById(id)
+                .orElseThrow(()-> new IOException("Empleado con id " + id +" no encontrado"));
     }
 }

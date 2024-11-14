@@ -22,6 +22,7 @@ public class ProductoDeserializer extends JsonDeserializer<Producto> {
         Long id = jsonParser.getLongValue();
         Producto producto = new Producto();
         producto.setId(id);
-        return producto;
+        return this.productoRepository.findById(id)
+                .orElseThrow(()-> new IOException("Producto con id " + id +" no encontrado"));
     }
 }

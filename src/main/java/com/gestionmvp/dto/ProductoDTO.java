@@ -32,9 +32,9 @@ public class ProductoDTO {
 
     }
 
-    @JsonProperty("precio")
-    public String getPrecio(){
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
-        return numberFormat.format(precio);
-    }
+//    @JsonProperty("precio")
+//    public String getPrecio(){
+//        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+//        return numberFormat.format(precio);
+//    }
 }

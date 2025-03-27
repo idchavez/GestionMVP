@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/gestionmvp-app")
-//@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(value = "http://localhost:4200")
 public class EmpleadoController {
 
     private final EmpleadoService empleadoService;

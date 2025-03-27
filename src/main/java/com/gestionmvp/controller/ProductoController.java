@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("gestionmvp-app")
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(value = "http://localhost:3000")
 public class ProductoController {
     private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 

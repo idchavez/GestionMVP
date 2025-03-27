@@ -26,27 +26,29 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Autowired
-    private JwtUtils jwtUtils;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,JwtUtils jwtUtils) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http ->{
                     //public endpoints
+                    http.requestMatchers(
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**",
+                            "/swagger-ui.html").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/gestionmvp/auth/**").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/gestionmvp-app/**").permitAll();
 
                     //private endpoints
-                    http.requestMatchers(HttpMethod.GET,"/gestionmvp-app/**").hasAnyAuthority("READ");
-                    http.requestMatchers(HttpMethod.POST,"/gestionmvp-app/**").hasAnyAuthority("CREATE");
-                    http.requestMatchers(HttpMethod.PUT,"/gestionmvp-app/**").hasAnyAuthority("UPDATE");
-                    http.requestMatchers(HttpMethod.DELETE,"/gestionmvp-app/**").hasAnyAuthority("DELETE");
+
+//                    http.requestMatchers(HttpMethod.GET,"/gestionmvp-app/**").hasAnyAuthority("READ");
+//                    http.requestMatchers(HttpMethod.POST,"/gestionmvp-app/**").hasAnyAuthority("CREATE");
+//                    http.requestMatchers(HttpMethod.PUT,"/gestionmvp-app/**").hasAnyAuthority("UPDATE");
+//                    http.requestMatchers(HttpMethod.DELETE,"/gestionmvp-app/**").hasAnyAuthority("DELETE");
 
                     //else...
-                    //http.anyRequest().authenticated();
                     http.anyRequest().denyAll();
 
                 })

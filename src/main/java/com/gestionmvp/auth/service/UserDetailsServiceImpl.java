@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
         usuario.getRoles()
-                .forEach(rol -> authorityList.add(new SimpleGrantedAuthority("ROL_".concat(rol.getRoleEnum().name()))));
+                .forEach(rol -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(rol.getRoleEnum().name()))));
 
         usuario.getRoles().stream()
                 .flatMap(rol -> rol.getPermisosLista().stream())
@@ -115,7 +115,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         ArrayList<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
-        usuarioCreado.getRoles().forEach(rol -> authorityList.add(new SimpleGrantedAuthority("ROL_".concat(rol.getRoleEnum().name()))));
+        usuarioCreado.getRoles().forEach(rol -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(rol.getRoleEnum().name()))));
 
         usuarioCreado.getRoles()
                 .stream()
